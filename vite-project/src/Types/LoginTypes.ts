@@ -9,6 +9,9 @@ export interface LoginFormData {
      username: string;
      email: string;
    };
-   token: string;
+   token: {
+    token:string
+    user_id:string
+   };
  }
  

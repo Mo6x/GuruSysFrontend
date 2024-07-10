@@ -27,7 +27,7 @@ const useRegister = () => {
     {
       onSuccess: () => {
         toast.success("User registered successfully");
-        navigate("/login");
+        navigate("/Dashboard");
       },
       onError: (error) => {
         toast.error(error.message || "Error registering user");

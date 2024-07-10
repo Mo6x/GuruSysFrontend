@@ -3,8 +3,11 @@ import { createRoot } from "react-dom/client";
 import { QueryClientProvider } from "react-query";
 import queryClient from "../src/queryClient.ts"; 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Dashboard from "./Components/DashBoards/DashBoard.tsx";
+import ProtectedRoute from "./Components/ProtectedRoute.tsx";
 import App from './App.tsx'
 import './index.css'
+
 
 
 
@@ -14,15 +17,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const root = createRoot(rootElement);
     root.render(
       <React.StrictMode>
-        <QueryClientProvider client={queryClient}>
-          <Router>
-            <Routes>
-              <Route path="/" element={<App />} />
-              
-            </Routes>
-          </Router>
-        </QueryClientProvider>
-      </React.StrictMode>
+      <QueryClientProvider client={queryClient}>
+        <Router>
+          <Routes>
+            <Route path="/" element={<App />} />
+            <Route element={<ProtectedRoute />}>
+              <Route path="/Dashboard" element={<Dashboard />} />
+            </Route>
+            <Route path="/*" element={<App />} />
+          </Routes>
+        </Router>
+      </QueryClientProvider>
+    </React.StrictMode>
     );
   } else {
     console.error('Root element not found');

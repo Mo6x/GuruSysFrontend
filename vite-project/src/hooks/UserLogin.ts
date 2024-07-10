@@ -12,18 +12,26 @@ const useLogin = () => {
   const navigate = useNavigate();
 
   const loginMutation = useMutation<LoginResponse, Error, LoginFormData>(
-    async (userData: LoginFormData) => {
+    async (userData: LoginFormData) => {      
       const response = await axios.post<LoginResponse>(
-        `${import.meta.env.VITE_BASE_URL}/api/auth/login`,
+        `${import.meta.env.VITE_BASE_URL}api/auth/login`,
         userData,
         { headers: { "Content-Type": "application/json" } }
       );
+      if(response?.data?.token)
+       {
+        console.log(response.data);
+        
+        localStorage.setItem("authToken",response.data.token.token)
+        localStorage.setItem("user_id",response.data?.token.user_id as string)
+
+      }
       return response.data;
     },
     {
       onSuccess: () => {
         toast.success("Login successful");
-        navigate("/dashboard");
+        navigate("/Dashboard");
       },
       onError: (error) => {
         toast.error(error.message || "Error logging in");
