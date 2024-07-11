@@ -16,12 +16,12 @@ const fetchPosts = async () => {
   return data;
 };
 
-const fetchPostById = async (id: string) => {
-  const { data } = await axios.get(`${baseURL}api/posts/${id}`, {
-    headers: { Authorization: `Bearer ${getAuthToken()}` }
-  });
-  return data;
-};
+// const fetchPostById = async (id: string) => {
+//   const { data } = await axios.get(`${baseURL}api/posts/${id}`, {
+//     headers: { Authorization: `Bearer ${getAuthToken()}` }
+//   });
+//   return data;
+// };
 
 const createPost = async (formData: FormData) => {
    try {
@@ -77,11 +77,11 @@ const usePosts = () => {
 
   const { data: posts = [], isLoading, error, refetch } = useQuery('posts', fetchPosts);
 
-  const fetchPostByIdQuery = useQuery(['post', 'byId'], () => fetchPostById(''), {
-    enabled: false, // Disable automatic fetching
-    staleTime: 1000 * 60 * 10, // Refresh every 10 minutes
-    cacheTime: 1000 * 60 * 30, // Cache for 30 minutes
-  });
+//   const fetchPostByIdQuery = useQuery(['post', 'byId'], () => fetchPostById(''), {
+//     enabled: false,
+//     staleTime: 1000 * 60 * 10,
+//     cacheTime: 1000 * 60 * 30,
+//   });
 
   const createMutation = useMutation(createPost, {
     onSuccess: () => {

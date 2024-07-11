@@ -37,7 +37,7 @@ const CreatePostForm: React.FC = () => {
     const file = e.target.files?.[0];
     if (file) {
       setImage(file);
-      setImagePreview(URL.createObjectURL(file)); // Set image preview URL
+      setImagePreview(URL.createObjectURL(file)); 
     }
   };
 
